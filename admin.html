@@ -4,104 +4,117 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard</title>
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
     />
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-    <style type="text/tailwindcss">
-      @theme {
-        --color-clifford: #da373d;
-      }
-    </style>
   </head>
-  <body class="bg-gray-100">
-    <div class="flex h-screen">
-      <!-- SIDEBAR -->
-      <aside class="w-64 bg-slate-800 text-white p-5 hidden md:block shadow-lg">
-        <h1 class="text-2xl font-bold mb-8">Admin Panel</h1>
 
-        <ul class="space-y-4">
-          <li class="hover:bg-slate-700 p-2 rounded cursor-pointer transition">
-            Dashboard
+  <body class="bg-gray-100 overflow-hidden">
+
+    <!-- WRAPPER -->
+    <div class="flex h-screen overflow-hidden">
+
+      <!--  SIDEBAR -->
+      <aside id="sidebar"
+        class="w-64 bg-gradient-to-b from-indigo-600 via-purple-700 to-[#1e1b4b] text-white p-5 fixed md:static top-0 left-0 h-full
+        transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-50 shadow-2xl">
+
+        <div class="flex items-center gap-3 mb-8">
+            
+            <h1 class="text-2xl font-extrabold tracking-wide">Admin Panel</h1>
+        </div>
+
+        <ul class="space-y-3 text-sm font-medium">
+          <li class="hover:bg-white/10 hover:translate-x-1 p-3 rounded-xl cursor-pointer transition-all duration-200 flex items-center gap-3 bg-white/5">
+            <i class="fa-solid fa-chart-line w-5 text-center"></i> Dashboard
           </li>
-          <li class="hover:bg-slate-700 p-2 rounded cursor-pointer transition">
-            Users
+          <li class="hover:bg-white/10 hover:translate-x-1 p-3 rounded-xl cursor-pointer transition-all duration-200 flex items-center gap-3">
+            <i class="fa-solid fa-users w-5 text-center"></i> Users
           </li>
-          <li class="hover:bg-slate-700 p-2 rounded cursor-pointer transition">
-            Settings
+          <li class="hover:bg-white/10 hover:translate-x-1 p-3 rounded-xl cursor-pointer transition-all duration-200 flex items-center gap-3">
+            <i class="fa-solid fa-gear w-5 text-center"></i> Settings
           </li>
         </ul>
       </aside>
 
+      <!--  OVERLAY -->
+      <div id="overlay" class="fixed inset-0 bg-black/50 hidden md:hidden"></div>
+
       <!-- MAIN -->
-      <div class="flex-1 flex flex-col">
+      <div class="flex-1 flex flex-col overflow-hidden">
+
         <!-- HEADER -->
-        <header
-          class="bg-white shadow-md p-4 flex justify-between items-center"
-        >
-          <h1 class="text-xl font-semibold text-gray-800">
+        <header class="bg-white shadow-md p-4 flex justify-between items-center shrink-0">
+
+          <!-- MENU BUTTON (MOBILE) -->
+          <button id="menuBtn" class="md:hidden text-xl">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <h1 class="text-sm md:text-xl font-semibold text-gray-800">
             Welcome to Admin Dashboard
           </h1>
 
-          <!-- ADMIN -->
           <div class="relative">
-            <div
-              id="avatar"
-              class="flex items-center gap-2 px-3 py-2 rounded-lg "
-            >
+            <div id="avatar" class="flex items-center gap-2 cursor-pointer">
               <i class="fa-solid fa-user"></i>
-              <span class="font-medium hidden sm:block"> Admin</span>
+              <span class="hidden sm:block">Admin</span>
             </div>
-            <div
-              id="dropdown"
-              class="hidden absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg border"
-            >
-              <button
-                id="logoutBtn"
-                class="w-full text-left px-4 py-2 "
-              >
-                Logout
+
+            <div id="dropdown"
+              class="hidden absolute right-0 mt-2 w-48 bg-white shadow-xl border border-gray-100 rounded-xl overflow-hidden transform transition-all">
+              <button id="logoutBtn" class="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors font-medium flex items-center gap-2">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
               </button>
             </div>
           </div>
+
         </header>
 
         <!-- CONTENT -->
-        <main class="p-6 flex-1 overflow-auto">
-          <div class="bg-white rounded-lg shadow p-6 border border-gray-200">
-            <h2 class="text-lg font-semibold text-gray-800 mb-2">
-              Dashboard Overview
-            </h2>
+        <main class="flex-1 p-4 md:p-6 overflow-hidden">
 
-            <p class="text-gray-500">
-              Manage users, roles and system data efficiently from here.
+          <div class="bg-white rounded-lg shadow border p-4 md:p-6 h-full flex flex-col">
+
+            <h2 class="text-lg font-semibold mb-2">Dashboard Overview</h2>
+
+            <p class="text-gray-500 mb-4 text-sm">
+              Manage users and system data efficiently.
             </p>
 
-            <div class="overflow-x-auto">
-              <table class="w-full text-sm">
-               <thead  class="bg-gray-100 text-gray-700 uppercase text-xs">
-                 <tr></tr>
-                 </thead>
+            <!--  TABLE CONTAINER -->
+            <div class="flex-1 overflow-auto">
 
-                <tbody id="tableBody" class="divide-y divide-gray-100">
-              
-                </tbody>
+              <table class="min-w-max w-full text-sm border-collapse">
+
+                <thead class="bg-indigo-50 text-indigo-800 uppercase text-xs sticky top-0 z-10 shadow-sm">
+                  <tr></tr>
+                </thead>
+
+                <tbody id="tableBody" class="divide-y divide-gray-200"></tbody>
+
               </table>
+
             </div>
+
           </div>
+
         </main>
 
         <!-- FOOTER -->
-        <footer class="bg-white text-center p-3 border-t text-gray-500 text-sm">
-          © 2026 Admin Dashboard | All Rights Reserved
+        <footer class="bg-white text-center p-3 text-sm text-gray-500 border-t shrink-0">
+          © 2026 Admin Dashboard
         </footer>
+
       </div>
     </div>
+
+    
+
     <script src="admin.js"></script>
   </body>
 </html>

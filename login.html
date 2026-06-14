@@ -3,74 +3,78 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LOGIN</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style type="text/tailwindcss">
-      @theme {
-        --color-clifford: #da373d;
-      }
-    </style>
+    <title>Login</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
- <body class="h-screen flex items-center justify-center bg-gray-100">
 
-  <!-- MAIN CARD -->
-  <div class="w-full max-w-5xl bg-white shadow-xl rounded-2xl overflow-hidden flex flex-col md:flex-row">
+  <!-- BACKGROUND: Aap in hex colors (#1e1b4b) ko apni image ke background se match kar ke change kar sakte hain -->
+  <body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-600 to-[#1e1b4b] p-4 sm:p-8">
 
-    <!-- LEFT IMAGE -->
-    <div class="w-full md:w-1/2 h-64 md:h-auto">
-      <img
-        src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop"
-        class="w-full h-full object-cover"
-        alt="login"
-      />
-    </div>
+    <!-- MAIN CARD -->
+    <div class="w-full max-w-5xl bg-white shadow-2xl rounded-2xl overflow-hidden flex flex-col md:flex-row">
 
-
-    <div class="w-full flex items-center justify-center md:w-1/2 p-4 md:p-10">
-
-      <div class="w-full max-w-md p-10">
-
-        <h2 class="text-3xl font-bold text-center mb-8">
-         Login Form 
-        </h2>
-
-   <form id="loginForm">
-
-        <input
-          type="email"
-          id="email"
-          placeholder="Enter Email"
-          class="w-full border p-3 rounded-lg mb-4 outline-none "
+      <!-- IMAGE SIDE -->
+      <!-- Mobile par iski fix height h-72 hogi takay cut na ho, desktop par ye md:h-auto ho jayegi -->
+      <div class="relative w-full h-72 sm:h-80 md:h-auto md:w-1/2 bg-gray-100 flex-shrink-0">
+        <!-- object-cover se image poori div ko cover karegi (top, bottom, left, right) -->
+        <img
+          src="./images/loginimg_no_icon.png"
+          class="absolute inset-0 w-full h-full object-cover object-left-top"
+          alt="login"
         />
+      </div>
 
-        
-        <input
-          type="password"
-          id="password"
-          placeholder="Enter Password"
-          class="w-full border p-3 rounded-lg mb-6 outline-none "
-        />
+      <!-- FORM SIDE -->
+      <div class="w-full md:w-1/2 flex items-center justify-center p-8 sm:p-12 lg:p-16">
 
-        <button
-        type="submit"  
-        id="loginBtn"
-          class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
-        >
-          Login
-        </button>
-      </form>
-         <p class="text-center mt-4 text-sm">
-          Don’t have an account?
-          <a href="signUp.html" class="text-blue-600 font-semibold">
-            Sign up
-          </a>
-        </p>
+        <div class="w-full max-w-md">
+
+          <h2 class="text-3xl font-extrabold text-center mb-8 text-gray-800">
+            Welcome Back
+          </h2>
+
+          <form id="loginForm" class="space-y-5">
+
+            <div>
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter Email"
+                class="w-full border border-gray-300 p-3.5 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-gray-50"
+              />
+            </div>
+
+            <div>
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter Password"
+                class="w-full border border-gray-300 p-3.5 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-gray-50"
+              />
+            </div>
+
+            <button
+              type="submit"
+              class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold py-3.5 rounded-xl hover:opacity-90 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+            >
+              Login
+            </button>
+
+          </form>
+
+          <p class="text-center mt-8 text-sm text-gray-600">
+            Don’t have an account?
+            <a href="signUp.html" class="text-indigo-600 font-bold hover:underline transition">
+              Sign up
+            </a>
+          </p>
+
+        </div>
 
       </div>
 
     </div>
-
-  </div>
- <script src="login.js"></script>
-</body>
+    <script src="login.js"></script>
+  </body>
 </html>
