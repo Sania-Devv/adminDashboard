@@ -93,5 +93,5 @@ signupForm.addEventListener("submit", (e) => {
 
   alert("Signup Successful!");
 
-  window.location.href = "login.html";
+  window.location.href = "index.html";
 });
