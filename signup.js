@@ -6,16 +6,16 @@ const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{6,}$/;
 signupForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  console.log("✅ Form Submitted");
+  console.log("Form Submitted");
 
   let users = JSON.parse(localStorage.getItem("users")) || [];
-  console.log("📦 Existing Users:", users);
+  console.log("Existing Users:", users);
 
   // FormData
   let formData = new FormData(e.target);
   let data = Object.fromEntries(formData);
 
-  console.log("📝 Form Data:", data);
+  console.log("Form Data:", data);
 
   // Trim values
   let firstName = data.firstName.trim();

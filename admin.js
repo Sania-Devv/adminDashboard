@@ -3,7 +3,7 @@ let isLoggedIn = localStorage.getItem("isLoggedIn");
 if (!isLoggedIn) {
   window.location.href = "login.html";
 }
-console.log(localStorage);
+// console.log(localStorage);
 let usersData = [];
 
 const API_URL = "https://dummyjson.com/users";
@@ -14,6 +14,7 @@ async function getUsers() {
     let data = await response.json();
 
     usersData = data.users; 
+    console.log(usersData);
 
     renderTable(usersData);
   } catch (error) {
@@ -31,30 +32,27 @@ function renderTable(users) {
 
   const keys = Object.keys(users[0]);
 
-  // ================= HEADER =================
-  keys.forEach((key) => {
+  //  filter out object-type columns
+  const filteredKeys = keys.filter((key) => {
+    return typeof users[0][key] !== "object" || users[0][key] === null;
+  });
+
+  // HEADER
+  filteredKeys.forEach((key) => {
     const th = document.createElement("th");
     th.textContent = key;
     th.className = "p-3 text-left capitalize bg-gray-100";
     theadRow.appendChild(th);
   });
 
-  // ================= ROWS =================
+  // ROWS
   users.forEach((user) => {
     const tr = document.createElement("tr");
 
-    keys.forEach((key) => {
+    filteredKeys.forEach((key) => {
       const td = document.createElement("td");
-      td.className = "p-3 whitespace-nowrap";
-
-      let value = user[key];
-
-      // // FIX object Object issue
-      if (typeof value === "object" && value !== null) {
-        value = Object.values(value).join(" ");
-      }
-
-      td.textContent = value;
+      td.className = "p-3 max-w-[150px] truncate whitespace-nowrap overflow-hidden";
+      td.textContent = user[key];
       tr.appendChild(td);
     });
 
@@ -64,7 +62,6 @@ function renderTable(users) {
 
 async function initDashboard() {
   await getUsers();
-//   renderTable();
 }
 initDashboard();
 
